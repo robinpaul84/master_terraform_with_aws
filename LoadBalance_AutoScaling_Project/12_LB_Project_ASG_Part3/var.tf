@@ -1,9 +1,9 @@
 variable "region" {
-  
+
 }
 
 variable "vpc_cidr" {
-    
+
 }
 
 variable "instance_type" {
@@ -12,29 +12,29 @@ variable "instance_type" {
 
 variable "ami" {
   default = "ami-0b898040803850657"
-  
+
 }
 
 variable "public_subnet_cidr" {
-  type = "list"
-  
+  type = list
+
 }
 
 variable "private_subnet_cidr" {
-  type = "list"
+  type = list
 }
 
 variable "availability_zone" {
-  type = "list"
+  type = list
 }
 
 variable "public_subnet_names" {
-  type = "list"
-  
+  type = list
+
 }
 
 variable "private_subnet_names" {
-  type = "list"
-  
+  type = list
+
 }
 

@@ -1,12 +1,12 @@
 # output "vpc" {
-#   value = "${aws_vpc.mainvpc}"
+#   value = aws_vpc.mainvpc
 # }
 output "vpc_id" {
-  value = "${aws_vpc.mainvpc.id}"
+  value = aws_vpc.mainvpc.id
 }
 
 output "alb_dns" {
-  value = "${aws_alb.webapp_load_balancer.dns_name}"
+  value = aws_alb.webapp_load_balancer.dns_name
 }
 
 

@@ -12,7 +12,7 @@ resource "aws_vpc" "mainvpc" {
 resource "aws_security_group" "allow_ssh" {
     name        = "allow_ssh"
     description = "Allow SSH inbound traffic/ Allow all outbound traffic"
-    vpc_id      = "${aws_vpc.mainvpc.id}"
+    vpc_id      = aws_vpc.mainvpc.id
 
     ingress {
     from_port   = 22
@@ -31,16 +31,16 @@ resource "aws_security_group" "allow_ssh" {
         Name = "SecurityGroup_TF"
     }
 
-    depends_on = ["aws_vpc.mainvpc"]
+    depends_on = [aws_vpc.mainvpc]
 }
 
 resource "aws_internet_gateway" "IGW_TF" {
-  vpc_id = "${aws_vpc.mainvpc.id}"
+  vpc_id = aws_vpc.mainvpc.id
 
   tags = {
     Name = "IGW_TF"
   }
-  depends_on = ["aws_vpc.mainvpc"]
+  depends_on = [aws_vpc.mainvpc]
 }
 
 resource "aws_eip" "EIP" {
@@ -52,13 +52,13 @@ resource "aws_eip" "EIP" {
 }
 
 resource "aws_nat_gateway" "NATGW" {
-    allocation_id = "${aws_eip.EIP.id}"
-    subnet_id = "${aws_subnet.PublicSubnet_A.id}"
+    allocation_id = aws_eip.EIP.id
+    subnet_id = aws_subnet.PublicSubnet_A.id
 
     tags = {
         Name  = "NATGW"
     }
-    depends_on = ["aws_eip.EIP","aws_subnet.PublicSubnet_A"]
+    depends_on = [aws_eip.EIP,aws_subnet.PublicSubnet_A]
   
 }
 

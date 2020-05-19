@@ -14,21 +14,21 @@ resource "aws_instance" "MyfirstEC2instance_Terraform" {
 
 
 resource "aws_eip" "myeip" {
-  instance = "${aws_instance.MyfirstEC2instance_Terraform.id}"
+  instance = aws_instance.MyfirstEC2instance_Terraform.id
 }
 
 output "my_eip" {
-  value = "${aws_eip.myeip.public_ip}"
+  value = aws_eip.myeip.public_ip
 }
 
 
 resource "null_resource" "ec2-ssh-connection" {
     connection {
-          host        = "${aws_eip.myeip.public_ip}"
+          host        = aws_eip.myeip.public_ip
           type        = "ssh"
           port        = 22
           user        = "ec2-user"
-          private_key = "${file("/Users/robin/Downloads/ec2_keypair.pem")}"
+          private_key = file("/Users/robin/Downloads/ec2_keypair.pem")
           timeout     = "1m"
           agent       = false
         }

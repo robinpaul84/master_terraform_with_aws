@@ -16,25 +16,25 @@ variable "ami" {
 }
 
 variable "public_subnet_cidr" {
-  type = "list"
+  type = list
   
 }
 
 variable "private_subnet_cidr" {
-  type = "list"
+  type = list
 }
 
 variable "availability_zone" {
-  type = "list"
+  type = list
 }
 
 variable "public_subnet_names" {
-  type = "list"
+  type = list
   
 }
 
 variable "private_subnet_names" {
-  type = "list"
+  type = list
   
 }
 
