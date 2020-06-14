@@ -1,0 +1,6 @@
+*.tfstate*
+.terraform.tfstate*
+*.xml
+.node*
+.terraform/
+
