@@ -8,7 +8,7 @@ resource "aws_subnet" "public_subnets" {
   tags = {
     Name = "${element(var.public_subnet_names, count.index)}"
   }
-  depends_on = ["aws_vpc.mainvpc"]
+  depends_on = [aws_vpc.mainvpc]
 }
 
 resource "aws_subnet" "private_subnets" {
@@ -21,5 +21,5 @@ resource "aws_subnet" "private_subnets" {
   tags = {
     Name = "${element(var.private_subnet_names, count.index)}"
   }
-  depends_on = ["aws_vpc.mainvpc"]
+  depends_on = [aws_vpc.mainvpc]
 }

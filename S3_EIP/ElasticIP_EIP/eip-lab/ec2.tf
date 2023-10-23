@@ -1,10 +1,10 @@
 resource "aws_instance" "MyFirstEc2instance_from_terraform-EIP_demo" {
-  ami = "ami-0b898040803850657"
+  ami = "ami-09cb21a1e29bcebf0"
   instance_type = "t2.micro"
   tags = {
       Name = "EC2started_from_console_from_terraform_EIP_DEMO"
   }
-  key_name = "ec2demo_1"
+  key_name = "testkey"
   
   user_data = <<-EOF
                 #!/bin/bash

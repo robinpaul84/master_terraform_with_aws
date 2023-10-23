@@ -5,7 +5,7 @@ resource "aws_launch_configuration" "worker" {
   instance_type               = "${var.instance_type}"
   security_groups             = ["${aws_security_group.elb_security_group.id}"]
   associate_public_ip_address = true
-  key_name = "ec2_keypair"
+  key_name = "testkey-us"
   user_data = <<-EOF
                 #!/bin/bash
                 yum update -y

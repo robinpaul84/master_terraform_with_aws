@@ -22,7 +22,7 @@ resource "aws_security_group" "ec2_public_security_group" {
         Name = "ec2_public_security_group"
     }
 
-    depends_on = ["aws_vpc.mainvpc","aws_security_group.elb_security_group"]
+    depends_on = [aws_vpc.mainvpc,aws_security_group.elb_security_group]
 }
 
 resource "aws_security_group" "ec2_private_security_group" {
@@ -48,7 +48,7 @@ resource "aws_security_group" "ec2_private_security_group" {
         Name = "ec2_private_security_group"
     }
 
-    depends_on = ["aws_vpc.mainvpc","aws_security_group.ec2_public_security_group"]
+    depends_on = [aws_vpc.mainvpc,aws_security_group.ec2_public_security_group]
 }
 
 

@@ -31,7 +31,7 @@ resource "aws_security_group" "allow_ssh" {
         Name = "SecurityGroup_TF"
     }
 
-    depends_on = ["aws_vpc.mainvpc"]
+    depends_on = [aws_vpc.mainvpc]
 }
 
 resource "aws_internet_gateway" "IGW_TF" {
@@ -40,11 +40,11 @@ resource "aws_internet_gateway" "IGW_TF" {
   tags = {
     Name = "IGW_TF"
   }
-  depends_on = ["aws_vpc.mainvpc"]
+  depends_on = [aws_vpc.mainvpc]
 }
 
 resource "aws_eip" "EIP" {
-  vpc              = true
+  domain   = "vpc"
   tags = {
     Name = "EIP"
   }
@@ -58,7 +58,7 @@ resource "aws_nat_gateway" "NATGW" {
     tags = {
         Name  = "NATGW"
     }
-    depends_on = ["aws_eip.EIP","aws_subnet.PublicSubnet_A"]
+    depends_on = [aws_eip.EIP,aws_subnet.PublicSubnet_A]
   
 }
 

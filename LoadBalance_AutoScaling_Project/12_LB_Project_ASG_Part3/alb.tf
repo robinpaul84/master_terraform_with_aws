@@ -9,8 +9,8 @@ tags = {
     Name = "webapp_load_balancer_TF"
   }
   subnets = "${aws_subnet.public_subnets.*.id}"
-  depends_on = ["aws_subnet.public_subnets",
-              "aws_security_group.elb_security_group"]
+  depends_on = [aws_subnet.public_subnets,
+              aws_security_group.elb_security_group]
 }
 
 
@@ -32,7 +32,7 @@ resource "aws_alb_target_group" "alb_front_http" {
     tags = {
         Name = "alb_front_http_TF"
     }
-  depends_on = ["aws_vpc.mainvpc"]
+  depends_on = [aws_vpc.mainvpc]
 }
 
 resource "aws_alb_target_group_attachment" "targetgroup_alb" {
@@ -52,7 +52,7 @@ resource "aws_alb_listener" "front_end" {
     target_group_arn = "${aws_alb_target_group.alb_front_http.arn}"
   }
  
-  depends_on = ["aws_alb.webapp_load_balancer",
-                "aws_alb_target_group.alb_front_http"
+  depends_on = [aws_alb.webapp_load_balancer,
+                aws_alb_target_group.alb_front_http
               ]
 }

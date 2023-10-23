@@ -5,31 +5,46 @@ resource "aws_ecs_cluster" "main" {
   tags = {
       Name = "ecs_demo_terraform_course"
   }
+}
   
-}
-
-data "template_file" "web-app" {
-  template = file("./templates/ecs/web_app.json.tpl")
-
-  vars = {
-    app_image      = var.app_image //aws_ecr_repository.ecr_lab.repository_url
-    app_port       = var.app_port
-    fargate_cpu    = var.fargate_cpu
-    fargate_memory = var.fargate_memory
-    aws_region     = var.aws_region
-  }
-
-}
-
-resource "aws_ecs_task_definition" "app" {
+  resource "aws_ecs_task_definition" "app" {
   family                   = "web-app-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
   memory                   = var.fargate_memory
-  container_definitions    = data.template_file.web-app.rendered
+  container_definitions = <<DEFINITION
+  [
+  {
+    "name": "web-app",
+    "image": "${var.app_image}",
+    "cpu": ${var.fargate_cpu},
+    "memory": ${var.fargate_memory},
+    "networkMode": "awsvpc",
+    "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/web-app",
+          "awslogs-region": "${var.aws_region}",
+          "awslogs-stream-prefix": "ecs"
+        }
+    },
+    "portMappings": [
+      {
+        "containerPort": ${var.app_port},
+        "hostPort": ${var.app_port}
+      }
+    ]
+  }
+]
 
+  DEFINITION
+
+  runtime_platform {
+    operating_system_family = "LINUX"
+    cpu_architecture        = "ARM64"
+  }
   depends_on = [aws_cloudwatch_log_stream.web_app_log_stream]
 }
 

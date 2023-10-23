@@ -5,14 +5,14 @@ resource "aws_lambda_function" "lambda_tf" {
   #filename = lambda
   #function_name = lambda_handler  
   handler       = "lambda.lambda_handler"
-  runtime       = "python2.7"
+  runtime       = "python3.9"
   
 
   # The filebase64sha256() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the base64sha256() function and the file() function:
   # source_code_hash = "${base64sha256(file("lambda.zip"))}"
   source_code_hash = "${filebase64sha256("lambda.zip")}"
-  depends_on = ["aws_iam_role.iam_for_lambda"]
+  depends_on = [aws_iam_role.iam_for_lambda]
 }
 
 
@@ -40,7 +40,7 @@ POLICY
 resource "aws_cloudwatch_log_group" "lambda_log_group" {
   name              = "/aws/lambda/${aws_lambda_function.lambda_tf.function_name}"
   retention_in_days = 14
-  depends_on = ["aws_lambda_function.lambda_tf"]
+  depends_on = [aws_lambda_function.lambda_tf]
 }
 
 resource "aws_iam_policy" "lambda_logging" {
@@ -80,7 +80,7 @@ resource "aws_lambda_permission" "apigw_lambda" {
   # The /*/*/* part allows invocation from any stage, method and resource path
   # within API Gateway REST API.
   source_arn = "${aws_api_gateway_rest_api.api.execution_arn}/*/*/*"
-  depends_on = ["aws_lambda_function.lambda_tf","aws_api_gateway_rest_api.api"]
+  depends_on = [aws_lambda_function.lambda_tf,aws_api_gateway_rest_api.api]
 }
 
 output "lambdafunction-details" {

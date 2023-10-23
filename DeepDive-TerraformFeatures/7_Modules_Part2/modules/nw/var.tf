@@ -18,7 +18,7 @@ variable "cidr_subnet" {
 }
 
 variable "az" {
-  default = "us-east-1e"
+  default = "eu-central-1a"
 }
 
 

@@ -7,7 +7,7 @@ resource "aws_subnet" "PublicSubnet_A" {
   tags = {
     Name = "PublicSubnet_A"
   }
-  depends_on = ["aws_vpc.mainvpc"]
+  depends_on = [aws_vpc.mainvpc]
 }
 
 resource "aws_subnet" "PrivateSubnet_A" {
@@ -19,5 +19,5 @@ resource "aws_subnet" "PrivateSubnet_A" {
   tags = {
     Name = "PrivateSubnet_A"
   }
-  depends_on = ["aws_vpc.mainvpc"]
+  depends_on = [aws_vpc.mainvpc]
 }

@@ -13,7 +13,7 @@ resource "aws_subnet" "my_subnet" {
         Name = "Subnet-module-demo"
     }
     availability_zone = "${var.az}"
-    depends_on = ["aws_vpc.my_vpc"]
+    depends_on = [aws_vpc.my_vpc]
 }
 
 #This way prod/ec2_Webapp.tf can access this variables and pass it to vpc creation 

@@ -14,11 +14,11 @@ resource "aws_internet_gateway" "IGW_TF" {
   tags = {
     Name = "IGW_TF"
   }
-  depends_on = ["aws_vpc.mainvpc"]
+  depends_on = [aws_vpc.mainvpc]
 }
 
 resource "aws_eip" "EIP" {
-  vpc              = true
+  domain   = "vpc"
   tags = {
     Name = "EIP"
   }
@@ -32,7 +32,7 @@ resource "aws_nat_gateway" "NATGW" {
     tags = {
         Name  = "NATGW"
     }
-    depends_on = ["aws_eip.EIP","aws_subnet.public_subnets"]
+    depends_on = [aws_eip.EIP,aws_subnet.public_subnets]
   
 }
 

@@ -1,5 +1,5 @@
 variable "ami" {
-  default = "ami-0b898040803850657"
+  default = "ami-09cb21a1e29bcebf0"
 }
 
 variable "instance_type" {
@@ -11,7 +11,7 @@ variable "ec2_name" {
 }
 
 variable "availability_zone" {
-  default = "us-east-1e"
+  default = "eu-central-1a"
 }
 variable "subnet_id" {
   default = ""

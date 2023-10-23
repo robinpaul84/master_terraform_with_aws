@@ -54,7 +54,7 @@ resource "aws_route" "internet_access" {
 # Create a NAT gateway with an Elastic IP for each private subnet to get internet connectivity
 resource "aws_eip" "gw" {
   count      = var.az_count
-  vpc        = true
+  domain     = "vpc"
   tags = {
       Name = "ecs_demo_terraform_course"
   }

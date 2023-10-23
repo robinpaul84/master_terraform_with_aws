@@ -1,5 +1,5 @@
 resource "aws_eip" "myEIP" {
-  vpc   =   true
+  domain   =   "vpc"
 }
 
 output "ec2_public_ip" {

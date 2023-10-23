@@ -1,5 +1,5 @@
 variable "ami" {
-    default = "ami-0b898040803850657"
+    default = "ami-09cb21a1e29bcebf0"
 }
 
 variable "instance_type" {
@@ -7,6 +7,6 @@ variable "instance_type" {
 }
 
 variable "subnetid" {
-  default = "subnet-0a58e322b90bc6790"
+  default = "subnet-02561f643a450c0ce"
 }
 

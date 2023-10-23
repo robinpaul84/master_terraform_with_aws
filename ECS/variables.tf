@@ -17,7 +17,7 @@ variable "az_count" {
 
 variable "app_image" {
   description = "Docker image to run in the ECS cluster"
-  default     = "439398671644.dkr.ecr.us-east-1.amazonaws.com/ecr-repo-for-tf-lab:v1"
+  default     = "439398671644.dkr.ecr.us-east-1.amazonaws.com/awslab:v1"
 }
 
 variable "app_port" {

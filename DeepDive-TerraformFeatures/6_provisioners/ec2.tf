@@ -1,8 +1,8 @@
 resource "aws_instance" "MyfirstEC2instance_Terraform" {
     
-    ami =   "ami-0b898040803850657"
+    ami =   "ami-09cb21a1e29bcebf0"
     instance_type = "t2.micro"
-    key_name = "ec2_keypair"
+    key_name = "demokey"
     tags = {
       Name = "MyfirstEC2instance_Terraform"
     }
@@ -28,7 +28,7 @@ resource "null_resource" "ec2-ssh-connection" {
           type        = "ssh"
           port        = 22
           user        = "ec2-user"
-          private_key = "${file("/Users/robin/Downloads/ec2_keypair.pem")}"
+          private_key = file("/Users/robinpaul/Downloads/demokey.pem")
           timeout     = "1m"
           agent       = false
         }
@@ -38,6 +38,7 @@ resource "null_resource" "ec2-ssh-connection" {
         destination = "/home/ec2-user/index.html"
       }
     provisioner "remote-exec" {
+      
           inline = [
           "sudo yum update -y",
           "sudo yum install -y httpd",
@@ -47,5 +48,6 @@ resource "null_resource" "ec2-ssh-connection" {
        ]
       }
 }
+
 
 # remote_exec
