@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment                              
+metadata:      
+  name: nginx 
+spec:
+  selector:
+    matchLabels:
+      run: nginx
+  replicas: 2
+  template:
+    metadata:
+        labels:
+          run: nginx
+    spec:
+      containers:
+      - name: webserver  # The name that this container will have.
+        image: nginx:latest # The image on which it is based.
+        ports:               # The port(s) that will be open.
+          - containerPort: 80

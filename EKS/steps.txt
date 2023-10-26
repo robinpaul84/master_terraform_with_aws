@@ -1,0 +1,42 @@
+
+eksroles -> select eks and attach following policies
+    AmazonEKSClusterPolicy
+workernode roles  -> select ec2 and attach following policies
+    AmazonEC2ContainerRegistryReadOnly , AmazonEKS_CNI_Policy , AmazonEKSWorkerNodePolicy
+
+
+create eks cluster 
+install aws cli ; aws configure # # https://aws.amazon.com/cli/
+check aws commands are working 
+    aws iam list-users
+
+install kubectl #https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+install aws-iam-authenticator #https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+
+
+aws eks update-kubeconfig --region us-east-1 --name eks
+
+export KUBECONFIG=~/.kube/config
+kubectl get svc
+kubectl create -f nginx.yaml 
+
+
+kubectl get svc -o wide
+kubectl get nodes --watch
+kubectl get deploy
+kubectl get pods
+
+kubectl create -f nginx-svc.yaml 
+
+kubectl describe svc nginx
+
+# to update 
+kubectl scale --replicas=3 -f nginx.yaml 
+kubectl apply -f nginx.yaml 
+
+# to delete
+kubectl delete -f nginx.yaml
+kubectl delete svc nginx
+
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
